@@ -54,14 +54,14 @@ router.post('/', verifyToken, (req, res) => {
         if (err) {
             res.sendStatus(403);
         } else {
-            const { id, firstname, lastname, email, phone, id_position, id_department, id_role, status, access, password } = req.body;
+            const { id, firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, password } = req.body;
             const saltRounds = 10;
             console.log('password', password);
             const hashPassword = bcrypt.hashSync(password, saltRounds);
             console.log('hashPass', hashPassword);
 
-            const query = 'CALL employeeAddOrEdit(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            mysqlConnection.query(query, [id, firstname, lastname, email, phone, id_position, id_department, id_role, status, access, hashPassword], (err, rows, fields) => {
+            const query = 'CALL employeeAddOrEdit(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            mysqlConnection.query(query, [id, firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, hashPassword], (err, rows, fields) => {
                 if (!err) {
                     res.json({ status: 'Employee Saved' })
                 } else {
@@ -81,14 +81,14 @@ router.put('/:id', verifyToken, (req, res) => {
             console.log(err);
             res.sendStatus(403);
         } else {
-            const { firstname, lastname, email, phone, id_position, id_department, id_role, status, access, password } = req.body;
+            const { firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, password } = req.body;
             const { id } = req.params;
             const saltRounds = 10;
             console.log('password', password);
             const hashPassword = bcrypt.hashSync(password, saltRounds);
             console.log('hashPass', hashPassword);
-            const query = 'CALL employeeAddOrEdit(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            mysqlConnection.query(query, [id, firstname, lastname, email, phone, id_position, id_department, id_role, status, access, hashPassword], (err, rows, fields) => {
+            const query = 'CALL employeeAddOrEdit(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            mysqlConnection.query(query, [id, firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, hashPassword], (err, rows, fields) => {
                 if (!err) {
                     res.json({ status: 'Employee Updated' })
                 } else {
