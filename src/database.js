@@ -7,6 +7,13 @@ const mysqlConnection = mysql.createConnection({
     database: 'sql11448759'
 });
 
+// const mysqlConnection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'test',
+//     password: 'test',
+//     database: 'project1'
+// });
+
 mysqlConnection.connect((err) => {
     if (err) {
         console.log(err);

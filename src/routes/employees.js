@@ -57,8 +57,10 @@ router.post('/', verifyToken, (req, res) => {
             const { id, firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, password } = req.body;
             const saltRounds = 10;
             console.log('password', password);
-            const hashPassword = bcrypt.hashSync(password, saltRounds);
-            console.log('hashPass', hashPassword);
+            if (password) {
+                const hashPassword = bcrypt.hashSync(password, saltRounds);
+                console.log('hashPass', hashPassword);
+            }
 
             const query = 'CALL employeeAddOrEdit(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
             mysqlConnection.query(query, [id, firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, hashPassword], (err, rows, fields) => {
@@ -85,8 +87,11 @@ router.put('/:id', verifyToken, (req, res) => {
             const { id } = req.params;
             const saltRounds = 10;
             console.log('password', password);
-            const hashPassword = bcrypt.hashSync(password, saltRounds);
-            console.log('hashPass', hashPassword);
+            if (password) {
+                const hashPassword = bcrypt.hashSync(password, saltRounds);
+                console.log('hashPass', hashPassword);
+            }
+
             const query = 'CALL employeeAddOrEdit(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
             mysqlConnection.query(query, [id, firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, hashPassword], (err, rows, fields) => {
                 if (!err) {
