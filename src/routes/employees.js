@@ -56,9 +56,10 @@ router.post('/', verifyToken, (req, res) => {
         } else {
             const { id, firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, password } = req.body;
             const saltRounds = 10;
+            let hashPassword = null;
             console.log('password', password);
             if (password) {
-                const hashPassword = bcrypt.hashSync(password, saltRounds);
+                hashPassword = bcrypt.hashSync(password, saltRounds);
                 console.log('hashPass', hashPassword);
             }
 
@@ -86,9 +87,10 @@ router.put('/:id', verifyToken, (req, res) => {
             const { firstname, lastname, email, phone, id_position, id_harbor, id_department, id_role, status, access, password } = req.body;
             const { id } = req.params;
             const saltRounds = 10;
+            let hashPassword = null;
             console.log('password', password);
             if (password) {
-                const hashPassword = bcrypt.hashSync(password, saltRounds);
+                hashPassword = bcrypt.hashSync(password, saltRounds);
                 console.log('hashPass', hashPassword);
             }
 
