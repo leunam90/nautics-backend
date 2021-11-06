@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     login() {
-      fetch('https://nautics-demo.herokuapp.com/login',{
+      fetch('/login',{
         method:'POST',
         mode:'no-cors',
         body: JSON.stringify(this.user),
