@@ -30,7 +30,7 @@
       <div class="position-relative">
         <div class="card mt-5">
           <div class="card-body">
-            <form @submit.prevent="login">
+            <form >
               <div class="mt-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label"
                   >Email</label
@@ -38,7 +38,7 @@
                 <div class="col-sm-6">
                   <input
                     type="text"
-                    v-model="user.username"
+                    v-model="user.email"
                     class="form-control"
                     id="staticEmail"
                     placeholder="Email"
@@ -61,7 +61,7 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <button class="btn btn-primary btn-block">Login</button>
+                  <button class="btn btn-primary btn-block" @click.prevent="login()">Login</button>
                 </div>
               </div>
             </form>
@@ -73,8 +73,8 @@
 </template>
 <script>
 class User {
-  constructor(username, password) {
-    this.username = username;
+  constructor(email, password) {
+    this.email = email;
     this.password = password;
   }
 }
@@ -85,19 +85,21 @@ export default {
     };
   },
   methods: {
-    login() {
-      fetch('/login',{
+    async login() {
+      console.log(this.user);
+      const r = await fetch('/login',{
         method:'POST',
-        mode:'no-cors',
         body: JSON.stringify(this.user),
         headers:{
-          'Accept':'application/json',
+          'Access-Control-Allow-Origin': '*',
           'Content-Type':'application/json'
         }
-      })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      this.user = new User();
+      });
+
+      const response = await r.json();
+      if(response){
+        console.log(response)
+      }
     },
   },
 };
