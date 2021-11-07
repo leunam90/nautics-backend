@@ -30,7 +30,7 @@
       <div class="position-relative">
         <div class="card mt-5">
           <div class="card-body">
-            <form >
+            <form>
               <div class="mt-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label"
                   >Email</label
@@ -61,7 +61,12 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <button class="btn btn-primary btn-block" @click.prevent="login()">Login</button>
+                  <button
+                    class="btn btn-primary btn-block"
+                    @click.prevent="login()"
+                  >
+                    Login
+                  </button>
                 </div>
               </div>
             </form>
@@ -88,12 +93,17 @@ export default {
   methods: {
     async login() {
       console.log(this.user);
+      let config = {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type':'application/json'
+        },
+      };
       let post = {
-        title:'foo',
-        body:JSON.stringify(this.user)
-      }
+        body: JSON.stringify(this.user),
+      };
 
-      let response = await axios.post('https://nautics-demo.herokuapp.com/login', post);
+      let response = await axios.post("https://nautics-demo.herokuapp.com/login", post, config );
       console.log(response);
 
       // const r = await fetch('https://nautics-demo.herokuapp.com/login',{
