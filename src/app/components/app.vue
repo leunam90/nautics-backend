@@ -72,7 +72,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 class User {
   constructor(email, password) {
     this.email = email;
