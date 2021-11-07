@@ -4,6 +4,16 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const mysqlConnection = require('../database');
 
+router.get('/', (req, res) => {
+    mysqlConnection.query('SELECT * FROM t_employees', (err, rows, fields) => {
+        if (!err) {
+            console.log('rows', rows);
+        } else {
+            console.log('error', err);
+        }
+    });
+});
+
 router.post('/', (req, res) => {
     console.log(req.body);
     const user = req.body;
