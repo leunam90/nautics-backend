@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
     mysqlConnection.query('SELECT * FROM t_employees', (err, rows, fields) => {
         if (!err) {
             console.log('rows', rows);
+            res.json({ result: rows });
         } else {
             console.log('error', err);
         }
