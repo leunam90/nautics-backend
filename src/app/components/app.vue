@@ -30,7 +30,7 @@
       <div class="position-relative">
         <div class="card mt-5">
           <div class="card-body">
-            <form>
+            <form >
               <div class="mt-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label"
                   >Email</label
@@ -61,12 +61,7 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <button
-                    class="btn btn-primary btn-block"
-                    @click.prevent="login()"
-                  >
-                    Login
-                  </button>
+                  <button class="btn btn-primary btn-block" @click.prevent="login()">Login</button>
                 </div>
               </div>
             </form>
@@ -93,40 +88,21 @@ export default {
   methods: {
     async login() {
       console.log(this.user);
-      let config = {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      };
-
-      let response = await axios.post(
-        "https://nautics-demo.herokuapp.com/login",
-        { body: JSON.stringify(this.user) },
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
+      const r = await fetch('https://nautics-demo.herokuapp.com/login',{
+        mode:'no-cors',
+        method:'POST',
+        body: JSON.stringify(this.user),
+        headers:{
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type':'application/json'
         }
-      );
-      console.log(response);
+      });
 
-      // const r = await fetch('https://nautics-demo.herokuapp.com/login',{
-      //   mode:'no-cors',
-      //   method:'POST',
-      //   body: JSON.stringify(this.user),
-      //   headers:{
-      //     'Access-Control-Allow-Origin': '*',
-      //     'Content-Type':'application/json'
-      //   }
-      // });
-
-      // const response = await r.json();
-      // console.log('respose: ', response);
-      // if(response){
-      //   console.log(response)
-      // }
+      const response = await r.json();
+      console.log('respose: ', response);
+      if(response){
+        console.log(response)
+      }
     },
   },
 };
