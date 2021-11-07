@@ -87,7 +87,8 @@ export default {
   methods: {
     async login() {
       console.log(this.user);
-      const r = await fetch('/login',{
+      const r = await fetch('https://nautics-demo.herokuapp.com/login',{
+        mode:'no-cors',
         method:'POST',
         body: JSON.stringify(this.user),
         headers:{
