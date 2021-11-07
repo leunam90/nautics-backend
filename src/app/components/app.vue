@@ -72,6 +72,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 class User {
   constructor(email, password) {
     this.email = email;
@@ -87,21 +88,29 @@ export default {
   methods: {
     async login() {
       console.log(this.user);
-      const r = await fetch('https://nautics-demo.herokuapp.com/login',{
-        mode:'no-cors',
-        method:'POST',
-        body: JSON.stringify(this.user),
-        headers:{
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type':'application/json'
-        }
-      });
-
-      const response = await r.json();
-      console.log('respose: ', response);
-      if(response){
-        console.log(response)
+      let post = {
+        title:'foo',
+        body:JSON.stringify(this.user)
       }
+
+      let response = await axios.post('https://nautics-demo.herokuapp.com/login', post);
+      console.log(response);
+
+      // const r = await fetch('https://nautics-demo.herokuapp.com/login',{
+      //   mode:'no-cors',
+      //   method:'POST',
+      //   body: JSON.stringify(this.user),
+      //   headers:{
+      //     'Access-Control-Allow-Origin': '*',
+      //     'Content-Type':'application/json'
+      //   }
+      // });
+
+      // const response = await r.json();
+      // console.log('respose: ', response);
+      // if(response){
+      //   console.log(response)
+      // }
     },
   },
 };
