@@ -95,15 +95,21 @@ export default {
       console.log(this.user);
       let config = {
         headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type':'application/json'
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
         },
       };
-      let post = {
-        body: JSON.stringify(this.user),
-      };
 
-      let response = await axios.post("https://nautics-demo.herokuapp.com/login", post, config );
+      let response = await axios.post(
+        "https://nautics-demo.herokuapp.com/login",
+        { body: JSON.stringify(this.user) },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log(response);
 
       // const r = await fetch('https://nautics-demo.herokuapp.com/login',{

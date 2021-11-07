@@ -6,8 +6,8 @@ const mysqlConnection = require('../database');
 
 router.post('/', (req, res) => {
     console.log(req.body);
-    const body = req.body;
-    const { email, password } = body.body;
+    const user = req.body;
+    const { email, password } = req.body;
     console.log('request body', req.body);
     const saltRounds = 10;
     console.log('password', password);
