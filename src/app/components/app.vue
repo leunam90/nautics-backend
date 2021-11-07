@@ -98,6 +98,7 @@ export default {
       });
 
       const response = await r.json();
+      console.log('respose: ', response);
       if(response){
         console.log(response)
       }

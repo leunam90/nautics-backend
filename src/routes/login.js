@@ -29,10 +29,9 @@ router.post('/', (req, res) => {
             } else {
                 res.json({ message: 'No rows found' });
             }
-
-
         } else {
             console.log(err);
+            res.json({ message: err });
         }
     });
 });
