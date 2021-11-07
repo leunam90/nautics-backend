@@ -1,10 +1,12 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 const app = express();
 
 
 //settings
 app.set('port', process.env.PORT || 3000);
+app.use(cors());
 
 //Middlewares
 app.use(express.json());

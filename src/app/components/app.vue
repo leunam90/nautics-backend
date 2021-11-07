@@ -61,7 +61,7 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <button class="btn btn-primary btn-block" @click.prevent="login()">Login</button>
+                  <button class="btn btn-primary btn-block" v-on:click.prevent="login">Login</button>
                 </div>
               </div>
             </form>
@@ -87,14 +87,13 @@ export default {
   methods: {
     async login() {
       console.log(this.user);
-      const r = await fetch('https://nautics-demo.herokuapp.com/login',{
-        mode:'no-cors',
+      const r = await fetch('/login',{
         method:'POST',
-        body: JSON.stringify(this.user),
         headers:{
           'Access-Control-Allow-Origin': '*',
           'Content-Type':'application/json'
-        }
+        },
+        body: JSON.stringify(this.user),
       });
 
       const response = await r.json();
